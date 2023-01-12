@@ -1,38 +1,520 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 1px solid red;
+}
+
+:root {
+  /*THIS IS FOR THE DARK THEME*/
+  --bg2color: #212121;
+  --txt2color: #e8e8e8;
+  /*THIS IS FOR THE LIGHT THEME*/
+  --bg1color: #e8e8e8;
+  --txt1color: #212121;
+
+}
+body{
+  background-color: var(--bg1color);
+  color: var(--txt1color);
+  transition: 1s;
+}
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 .App {
   text-align: center;
+  width: 100%;
+  height: 100vh;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#app {
+  width: 100%;
+  height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.dark-theme {
+  background-color: var(--bg2color);
+  color: var(--txt2color);
+}
+
+.light-theme {
+  background-color: var(--bg1color);
+  color: var(--txt1color);
+}
+/*THIS IS FOR THE LOADER*/
+
+.loader-page {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -10;
+  opacity: 0;
+  animation: loading 10s ;
+  
+  
+}
+
+@keyframes loading {
+  0% {
+    z-index: 10;
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    z-index: -10;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  width: 160px;
+  height: 100px;
+  margin-left: -80px;
+  margin-top: -50px;
+  border-radius: 5px;
+  background: #1e3f57;
+  animation: dot1_ 3s cubic-bezier(0.55,0.3,0.24,0.99) infinite;
+}
+
+.loader:nth-child(2) {
+  z-index: 11;
+  width: 150px;
+  height: 90px;
+  margin-top: -45px;
+  margin-left: -75px;
+  border-radius: 3px;
+  background: #3c517d;
+  animation-name: dot2_;
+}
+
+.loader:nth-child(3) {
+  z-index: 12;
+  width: 40px;
+  height: 20px;
+  margin-top: 50px;
+  margin-left: -20px;
+  border-radius: 0 0 5px 5px;
+  background: #6bb2cd;
+  animation-name: dot3_;
+}
+
+@keyframes dot1_ {
+  3%,97% {
+    width: 160px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -80px;
+  }
+
+  30%,36% {
+    width: 80px;
+    height: 120px;
+    margin-top: -60px;
+    margin-left: -40px;
+  }
+
+  63%,69% {
+    width: 40px;
+    height: 80px;
+    margin-top: -40px;
+    margin-left: -20px;
+  }
+}
+
+@keyframes dot2_ {
+  3%,97% {
+    height: 90px;
+    width: 150px;
+    margin-left: -75px;
+    margin-top: -45px;
+  }
+
+  30%,36% {
+    width: 70px;
+    height: 96px;
+    margin-left: -35px;
+    margin-top: -48px;
+  }
+
+  63%,69% {
+    width: 32px;
+    height: 60px;
+    margin-left: -16px;
+    margin-top: -30px;
+  }
+}
+
+@keyframes dot3_ {
+  3%,97% {
+    height: 20px;
+    width: 40px;
+    margin-left: -20px;
+    margin-top: 50px;
+  }
+
+  30%,36% {
+    width: 8px;
+    height: 8px;
+    margin-left: -5px;
+    margin-top: 49px;
+    border-radius: 8px;
+  }
+
+  63%,69% {
+    width: 16px;
+    height: 4px;
+    margin-left: -8px;
+    margin-top: -37px;
+    border-radius: 10px;
+  }
+}
+
+/*THIS IS FOR THE NAVBAR*/
+
+.nav {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.burger {
+  position: relative;
+  width: 40px;
+  height: 30px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.burger input {
+  display: none;
+}
+
+.burger span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.burger span:nth-of-type(1) {
+  top: 0px;
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(2) {
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(3) {
+  top: 100%;
+  transform-origin: left center;
+  transform: translateY(-100%);
+}
+
+.burger input:checked ~ span:nth-of-type(1) {
+  transform: rotate(45deg);
+  top: 0px;
+  left: 5px;
+}
+
+.burger input:checked ~ span:nth-of-type(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.burger input:checked ~ span:nth-of-type(3) {
+  transform: rotate(-45deg);
+  top: 28px;
+  left: 5px;
+}
+
+/*THIS IS FOR THE MENULIST*/
+
+.menulist {
+  position: absolute;
+  width: 80%;
+  height: 400px;
+  margin: 10px 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box
+}
+
+.menu-open {
+  width: 90%;
+  height: 90%;
+  border-radius: 15px;
+  overflow: hidden;
+  z-index: 1;
+  opacity: 1;
+  animation: menuOpen 1s ease-in-out;
+}
+
+@keyframes menuOpen {
+  0% {
+    
+    
+    opacity: 0;
+  }
+
+  5% {
+    z-index: 1;
+    width: 5%;
+    height: 5%;
+  }
+  50% {
+    width: 5%;
+    height: 90%;
+  }
+
+
+  95%{
+    z-index: 1;
+    width: 90%;
+    height: 90%;
+  }
+  100% {
+    
+    
+    opacity: 1;
+  }
+}
+
+.menu-close {
+  width: 5%;
+  height: 5%;
+  border-radius: 15px;
+  z-index: -5;
+  opacity: 0;
+  overflow: hidden;
+  animation: menuClose 1s ease-in-out;
+}
+
+@keyframes menuClose{
+  0% {
+    opacity: 1;
+    
+  }
+
+  5% {
+    z-index: 1;
+    width: 90%;
+    height: 90%;
+  }
+
+  50% {
+    width: 5%;
+    height: 90%;
+  }
+  95% {
+    z-index: -5;
+    width: 5%;
+    height: 5%;
+  }
+  100% {
+    opacity: 0;
+    
+  }
+}
+
+.menu-page {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 3px solid gray;
+  background-color: rgba(128, 128, 128, 0.598);
+}
+
+.menubtn {
+  width: 40%;
+  height: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px 0px;
+  border: 2px solid gray;
+  border-radius: 10px;
+}
+
+.menulinks {
+  width: 40%;
+  height: 90%;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
+  border: 2px solid gray;
+  border-radius: 10px;
+}
+
+.txt {
+  opacity: 0;
+}
+
+.links {
+  opacity: 1;
+}
+
+
+
+.menulinks h1 a {
+  text-decoration: none;
+  font-family: "Poppins" sans-serif;
+  border-radius: 10px;
+  padding: 10px;
+  letter-spacing: 2px;
+
+}
+
+/*THIS IS FOR THE MENU BUTTON*/
+
+button {
+  padding: 0.1em 0.25em;
+  width: 13em;
+  height: 4.2em;
+  background-color: #212121;
+  border: 0.08em solid #fff;
+  border-radius: 0.3em;
+  font-size: 12px;
+}
+
+button span {
+  position: relative;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  bottom: 0.4em;
+  width: 8.25em;
+  height: 2.5em;
+  background-color: #212121;
+  border-radius: 0.2em;
+  font-size: 1.5em;
+  color: #fff;
+  border: 0.08em solid #fff;
+  box-shadow: 0 0.4em 0.1em 0.019em #fff;
 }
 
-.App-link {
-  color: #61dafb;
+button span:hover {
+  transition: all 0.5s;
+  transform: translate(0, 0.4em);
+  box-shadow: 0 0 0 0 #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button span:not(hover) {
+  transition: all 1s;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  --width-of-switch: 3.5em;
+  --height-of-switch: 2em;
+  /* size of sliding icon -- sun and moon */
+  --size-of-icon: 1.4em;
+  /* it is like a inline-padding of switch */
+  --slider-offset: 0.3em;
+  position: relative;
+  width: var(--width-of-switch);
+  height: var(--height-of-switch);
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f4f4f5;
+  transition: .4s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: var(--size-of-icon,1.4em);
+  width: var(--size-of-icon,1.4em);
+  border-radius: 20px;
+  left: var(--slider-offset,0.3em);
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(40deg,#ff0080,#ff8c00 70%);
+  ;
+ transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #303136;
+}
+
+input:checked + .slider:before {
+  left: calc(100% - (var(--size-of-icon,1.4em) + var(--slider-offset,0.3em)));
+  background: #303136;
+  /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
+  box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+}
+
+/*THIS IS FOR THE PHONE SCREEN*/
+
+@media only screen and (max-width: 700px) {
+    .menu-page {
+      flex-direction: column;
+    }  
+  
+  .menubtn {
+      width: 90%;
+      height: 40%;
+    }
+
+    .menulinks {
+      width: 90%;
+      height: 40%;
+    }
+
+    .menulinks h1 {
+      font-size: 20px;
+      justify-content: space-evenly;
+      
+    }
+}
+
+/*This is FOR THE MAIN PAGE*/
+
+.main {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
